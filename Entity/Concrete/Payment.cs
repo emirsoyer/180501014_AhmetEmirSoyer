@@ -15,5 +15,6 @@ namespace Entity.Concrete
         public double PaymentAmount { get; set; }
         public int PatientId { get; set; }
         public DateTime PaymentDate { get; set; }
+        public Patient Patient { get; set; }
     }
 }

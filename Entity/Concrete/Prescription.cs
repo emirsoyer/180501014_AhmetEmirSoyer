@@ -15,5 +15,7 @@ namespace Entity.Concrete
         public int PatientId { get; set; }
         public string PrescriptionType { get; set; }
         public string PrescriptionDescription { get; set; }
+        public Patient Patient { get; set; }
+        public Doctor Doctor { get; set; }
     }
 }

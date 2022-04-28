@@ -14,6 +14,7 @@ namespace Entity.Concrete
         public int PatientId { get; set; }
         public string FileDescription { get; set; }
         public string FileType { get; set; }
+        public Patient Patient { get; set; }
 
     }
 }

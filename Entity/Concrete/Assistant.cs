@@ -13,5 +13,7 @@ namespace Entity.Concrete
         public int AssistantId { get; set; }
         public int UserId { get; set; }
         public string AssitantName { get; set; }
+        public User User { get; set; }
+
     }
 }
