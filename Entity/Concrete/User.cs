@@ -11,7 +11,6 @@ namespace Entity.Concrete
     {
         [Key]
         public int UserId { get; set; }
-        public int RoleId { get; set; }
         public int TCNumber { get; set; }
         public string UserName { get; set; }
         public string UserType { get; set; }

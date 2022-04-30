@@ -1,0 +1,29 @@
+﻿@using Entity.Concrete
+@model List<User>
+@{
+    Layout = null;
+}
+<link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<table class="table table-light">
+    <tr>
+        <th>Identifikationsnummer</th>
+        <th>Vorname</th>
+        <th>Geschlecht</th>
+        <th>E-Mail</th>
+        <th>Titel</th>
+        <th>Aktualisieren</th>
+        <th>Löschen</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TCNumber</td>
+            <td>@item.UserName</td>
+            <td>@item.Gender</td>
+            <td>@item.Email</td>
+            <td>@item.UserType</td>
+            <td><a href="#" class="btn btn-warning">Aktualisieren</a></td>
+            <td><a href="#" class="btn btn-danger">Löschen</a></td>
+        </tr>
+    }
+</table>

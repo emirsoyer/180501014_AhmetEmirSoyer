@@ -15,6 +15,7 @@ namespace DAL.Context
             optionsBuilder.UseSqlServer(
                 "server=DESKTOP-VJ9C9DG\\SQLEXPRESS;database=Zahnklinik;integrated security=True;");
         }
+
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Assistant> Assistants { get; set; }
         public DbSet<Doctor> Doctors { get; set; }

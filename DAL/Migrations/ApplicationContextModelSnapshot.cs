@@ -35,10 +35,14 @@ namespace DAL.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
                 });
@@ -124,6 +128,8 @@ namespace DAL.Migrations
 
                     b.HasKey("FileId");
 
+                    b.HasIndex("PatientId");
+
                     b.ToTable("PatientFiles");
                 });
 
@@ -147,6 +153,8 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentId");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Payments");
                 });
@@ -172,6 +180,10 @@ namespace DAL.Migrations
 
                     b.HasKey("PrescriptionId");
 
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
                     b.ToTable("Prescriptions");
                 });
 
@@ -188,9 +200,6 @@ namespace DAL.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TCNumber")
                         .HasColumnType("int");
 
@@ -203,6 +212,23 @@ namespace DAL.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Appointment", b =>
+                {
+                    b.HasOne("Entity.Concrete.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Concrete.Patient", "Patient")
+                        .WithMany("Appointments")
+                        .HasForeignKey("PatientId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Assistant", b =>
@@ -236,6 +262,63 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.PatientFile", b =>
+                {
+                    b.HasOne("Entity.Concrete.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Payment", b =>
+                {
+                    b.HasOne("Entity.Concrete.Patient", "Patient")
+                        .WithMany("Payments")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Prescription", b =>
+                {
+                    b.HasOne("Entity.Concrete.Doctor", "Doctor")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Concrete.Patient", "Patient")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Doctor", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Prescriptions");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Patient", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("Entity.Concrete.User", b =>

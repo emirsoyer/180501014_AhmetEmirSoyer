@@ -7,13 +7,13 @@ using Entity.Concrete;
 
 namespace DAL.Interfaces
 {
-    public interface IUserDal
+    public interface IUserDal:IGenericDal<User>
     {
-        List<User> GetUsers();
-        User GetUsersById(int userId);
-        void AddUser(User user);
-        void UpdateUser(User user);
-        void DeleteUser(User user); //int userId parametre olacak
+        //List<User> GetUsers();
+        //User GetUsersById(int userId);
+        //void AddUser(User user);
+        //void UpdateUser(User user);
+        //void DeleteUser(User user); //int userId parametre olacak
 
     }
 }
